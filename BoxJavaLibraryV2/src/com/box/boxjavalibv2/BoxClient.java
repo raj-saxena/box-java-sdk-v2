@@ -498,7 +498,7 @@ public class BoxClient extends BoxBase implements IAuthFlowListener {
      */
     public synchronized void authenticate(IAuthData authData) {
         OAuthDataController oauthController = getOAuthDataController();
-        oauthController.setOAuthData((BoxOAuthToken) authData);
+        oauthController.setOAuthData(authData);
     }
 
     /**

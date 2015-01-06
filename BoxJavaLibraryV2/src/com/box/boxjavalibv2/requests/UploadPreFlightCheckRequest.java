@@ -1,5 +1,6 @@
 package com.box.boxjavalibv2.requests;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 
 import com.box.boxjavalibv2.IBoxConfig;
@@ -13,7 +14,6 @@ import com.box.restclientv2.requestsbase.DefaultBoxRequest;
 public class UploadPreFlightCheckRequest extends DefaultBoxRequest {
 	private static final String URI_UPLOAD = "/files/content";
 	private static final String URI_UPLOAD_NEW_VERSION = "/files/%s/content";
-	private static final String EMPTY_STRING = "";
 
 	private UploadPreFlightCheckRequest(IBoxConfig config, IBoxJSONParser parser, String id, BoxDefaultRequestObject requestObject)
 			throws BoxRestException {
@@ -22,7 +22,7 @@ public class UploadPreFlightCheckRequest extends DefaultBoxRequest {
 	}
 	
 	private static String getUri(final String fileId) {
-        return (fileId != null && !EMPTY_STRING.equals(fileId)) ? String.format(URI_UPLOAD_NEW_VERSION, fileId) : URI_UPLOAD;
+        return StringUtils.isNotEmpty(fileId) ? String.format(URI_UPLOAD_NEW_VERSION, fileId) : URI_UPLOAD;
     }
 	
 	public static UploadPreFlightCheckRequest getUploadPreFlightCheckRequest(IBoxConfig config, IBoxJSONParser parser, 

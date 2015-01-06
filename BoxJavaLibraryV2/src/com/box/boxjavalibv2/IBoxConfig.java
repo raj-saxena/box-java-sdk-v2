@@ -80,4 +80,19 @@ public interface IBoxConfig {
     String getDownloadUrlPath();
 
     String getVersion();
+    
+    /**
+     * @return the View Url Scheme
+     */
+    public String getViewUrlScheme();
+    
+    /**
+     * @return the View Url Authority
+     */
+    public String getViewUrlAuthority();
+    
+    /**
+     * @return the View Url Path
+     */
+    public String getViewUrlPath();
 }

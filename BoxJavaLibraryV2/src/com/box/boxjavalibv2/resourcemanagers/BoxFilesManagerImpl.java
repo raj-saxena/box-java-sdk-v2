@@ -34,6 +34,7 @@ import com.box.boxjavalibv2.requests.GetPreviewRequest;
 import com.box.boxjavalibv2.requests.LockUnlockFileRequest;
 import com.box.boxjavalibv2.requests.PromoteOldFileVersionRequest;
 import com.box.boxjavalibv2.requests.ThumbnailRequest;
+import com.box.boxjavalibv2.requests.UploadPreFlightCheckRequest;
 import com.box.boxjavalibv2.requests.requestobjects.BoxFileRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxImageRequestObject;
 import com.box.boxjavalibv2.requests.requestobjects.BoxItemCopyRequestObject;
@@ -257,9 +258,18 @@ public class BoxFilesManagerImpl extends BoxItemsManagerImpl implements IBoxFile
 		return (BoxFile) getResponseAndParseAndTryCast(request, BoxResourceType.FILE, getJSONParser());
 	}
 
-	@Override
-	public BoxFile unlockFile(String fileId) throws BoxRestException, BoxServerException, AuthFatalFailureException {
-		LockUnlockFileRequest request = LockUnlockFileRequest.getUnlockFileRequest(getConfig(), getJSONParser(), fileId);
-		return (BoxFile) getResponseAndParseAndTryCast(request, BoxResourceType.FILE, getJSONParser());
-	}
+	 @Override
+	 public BoxFile unlockFile(String fileId) throws BoxRestException, BoxServerException, AuthFatalFailureException {
+		 LockUnlockFileRequest request = LockUnlockFileRequest.getUnlockFileRequest(getConfig(), getJSONParser(), fileId);
+		 return (BoxFile) getResponseAndParseAndTryCast(request, BoxResourceType.FILE, getJSONParser());
+	 }
+
+	 @Override
+	 public boolean uploadPreFlightCheck(String fileId, String filename, String parentId, long size) throws BoxRestException, BoxServerException,
+	 AuthFatalFailureException {
+		 UploadPreFlightCheckRequest request = UploadPreFlightCheckRequest.getUploadPreFlightCheckRequest(getConfig(), getJSONParser(), 
+				 fileId, filename, parentId, size);
+		 executeRequestWithNoResponseBody(request);
+		 return true;
+	 }
 }

@@ -25,6 +25,7 @@ import com.box.boxjavalibv2.dao.BoxServerError;
 import com.box.boxjavalibv2.dao.BoxThumbnail;
 import com.box.boxjavalibv2.dao.BoxTypedObject;
 import com.box.boxjavalibv2.dao.BoxUser;
+import com.box.boxjavalibv2.dao.BoxViewItem;
 import com.box.boxjavalibv2.dao.BoxWebLink;
 import com.box.boxjavalibv2.dao.IBoxType;
 
@@ -108,6 +109,8 @@ public class BoxResourceHub extends BaseBoxResourceHub {
             case GROUP_MEMBERSHIPS:
             case COLLECTIONS:
                 return BoxCollection.class;
+            case VIEW_ITEM:
+            	return BoxViewItem.class;
             default:
                 return BoxTypedObject.class;
         }

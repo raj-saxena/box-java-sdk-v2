@@ -14,7 +14,7 @@ public abstract class DefaultRequestAuth implements IBoxRequestAuth {
 
     @Override
     public void setAuth(final IBoxRequest request) throws BoxRestException, AuthFatalFailureException {
-        if (!(request instanceof DefaultBoxRequest)) {
+        if (!(request instanceof IBoxRequest)) {
             throw new BoxRestException("class does not match, expected:" + DefaultBoxRequest.class.getCanonicalName() + ";current:"
                                        + request.getClass().getCanonicalName());
         }

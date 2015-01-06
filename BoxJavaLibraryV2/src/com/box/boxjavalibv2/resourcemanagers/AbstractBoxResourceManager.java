@@ -17,6 +17,7 @@ import com.box.restclientv2.IBoxRESTClient;
 import com.box.restclientv2.authorization.IBoxRequestAuth;
 import com.box.restclientv2.exceptions.BoxRestException;
 import com.box.restclientv2.requestsbase.DefaultBoxRequest;
+import com.box.restclientv2.requestsbase.IBoxRequest;
 import com.box.restclientv2.responses.DefaultBoxResponse;
 
 /**
@@ -103,7 +104,7 @@ public abstract class AbstractBoxResourceManager implements IBoxResourceManager 
     /**
      * Make a rest api request, get response, parse the response, and try to cast parsed out object into expected object.
      */
-    public Object getResponseAndParseAndTryCast(final DefaultBoxRequest request, final IBoxType type, final IBoxJSONParser parser) throws BoxRestException,
+    public Object getResponseAndParseAndTryCast(final IBoxRequest request, final IBoxType type, final IBoxJSONParser parser) throws BoxRestException,
         AuthFatalFailureException, BoxServerException {
         Object obj = getResponseAndParse(request, type, parser);
         return tryCastObject(type, obj);
@@ -112,7 +113,7 @@ public abstract class AbstractBoxResourceManager implements IBoxResourceManager 
     /**
      * Make a rest api request, get response, and then parse the response.
      */
-    public Object getResponseAndParse(final DefaultBoxRequest request, final IBoxType type, final IBoxJSONParser parser) throws BoxRestException,
+    public Object getResponseAndParse(final IBoxRequest request, final IBoxType type, final IBoxJSONParser parser) throws BoxRestException,
         AuthFatalFailureException {
         request.setAuth(getAuth());
         DefaultBoxResponse response = (DefaultBoxResponse) getRestClient().execute(request);

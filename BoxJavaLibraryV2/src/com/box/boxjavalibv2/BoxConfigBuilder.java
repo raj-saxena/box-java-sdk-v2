@@ -34,6 +34,14 @@ public class BoxConfigBuilder {
     public static final String DOWNLOAD_URL_AUTHORITY = "api.box.com";
     /** Default Download url authority. */
     public static final String DOWNLOAD_URL_PATH = "/2.0";
+    
+    /** View API url scheme. */
+    public static final String VIEW_URL_SCHEME = "https";
+    /** View API url authority. */
+    public static final String VIEW_URL_AUTHORITY = "view-api.box.com";
+    /** View API url path. */
+    public static final String VIEW_URL_PATH = "/1/documents";
+    
     /** Default User-Agent String. */
     public static final String USER_AGENT = "BoxJavaLibraryV2";
 
@@ -50,6 +58,9 @@ public class BoxConfigBuilder {
     private String mDownloadUrlScheme = DOWNLOAD_URL_SCHEME;
     private String mDownloadUrlAuthority = DOWNLOAD_URL_AUTHORITY;
     private String mDownloadUrlPath = DOWNLOAD_URL_PATH;
+    private String mViewUrlScheme = VIEW_URL_SCHEME;
+    private String mViewUrlAuthority = VIEW_URL_AUTHORITY;
+    private String mViewUrlPath = VIEW_URL_PATH;
     private String mUserAgent = USER_AGENT;
     private String mVersion = VERSION_NUMBER;
 
@@ -208,6 +219,9 @@ public class BoxConfigBuilder {
         private final String mDownloadUrlScheme;
         private final String mDownloadUrlAuthority;
         private final String mDownloadUrlPath;
+        private final String mViewUrlScheme;
+        private final String mViewUrlAuthority;
+        private final String mViewUrlPath;
         private final String mUserAgent;
         private final String mVersion;
 
@@ -227,6 +241,10 @@ public class BoxConfigBuilder {
             this.mUploadUrlScheme = builder.mUploadUrlScheme;
             this.mUserAgent = builder.mUserAgent;
             this.mVersion = builder.mVersion;
+            this.mViewUrlScheme = builder.mViewUrlScheme;
+            this.mViewUrlAuthority = builder.mViewUrlAuthority;
+            this.mViewUrlPath = builder.mViewUrlPath;
+            		
         }
 
         /**
@@ -355,6 +373,21 @@ public class BoxConfigBuilder {
         public String getVersion() {
             return mVersion;
         }
+
+		@Override
+		public String getViewUrlScheme() {
+			return mViewUrlScheme;
+		}
+
+		@Override
+		public String getViewUrlAuthority() {
+			return mViewUrlAuthority;
+		}
+
+		@Override
+		public String getViewUrlPath() {
+			return mViewUrlPath;
+		}
 
     }
 }

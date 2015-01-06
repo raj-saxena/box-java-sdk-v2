@@ -41,6 +41,7 @@ import com.box.boxjavalibv2.resourcemanagers.BoxSearchManagerImpl;
 import com.box.boxjavalibv2.resourcemanagers.BoxSharedItemsManagerImpl;
 import com.box.boxjavalibv2.resourcemanagers.BoxTrashManagerImpl;
 import com.box.boxjavalibv2.resourcemanagers.BoxUsersManagerImpl;
+import com.box.boxjavalibv2.resourcemanagers.BoxViewManagerImpl;
 import com.box.boxjavalibv2.resourcemanagers.BoxWebLinksManagerImpl;
 import com.box.boxjavalibv2.resourcemanagers.IBoxCollaborationsManager;
 import com.box.boxjavalibv2.resourcemanagers.IBoxCollectionsManager;
@@ -56,6 +57,7 @@ import com.box.boxjavalibv2.resourcemanagers.IBoxSearchManager;
 import com.box.boxjavalibv2.resourcemanagers.IBoxSharedItemsManager;
 import com.box.boxjavalibv2.resourcemanagers.IBoxTrashManager;
 import com.box.boxjavalibv2.resourcemanagers.IBoxUsersManager;
+import com.box.boxjavalibv2.resourcemanagers.IBoxViewManager;
 import com.box.boxjavalibv2.resourcemanagers.IBoxWebLinksManager;
 import com.box.boxjavalibv2.resourcemanagers.IPluginResourceManagerBuilder;
 import com.box.restclientv2.IBoxRESTClient;
@@ -93,6 +95,8 @@ public class BoxClient extends BoxBase implements IAuthFlowListener {
     private final IBoxTrashManager trashManager;
     private final IBoxCollectionsManager collectionsManager;
     private final IBoxWebLinksManager webLinksManager;
+    private final IBoxViewManager viewManager;
+    
     private final Map<String, IBoxResourceManager> pluginResourceManagers = new HashMap<String, IBoxResourceManager>();
     /**
      * Listeners listening to the events of the states that this BoxClient gets authenticated. This is maintained in BoxClient class instead of directly using
@@ -174,6 +178,7 @@ public class BoxClient extends BoxBase implements IAuthFlowListener {
         trashManager = new BoxTrashManagerImpl(getConfig(), getResourceHub(), getJSONParser(), getAuth(), getRestClient());
         collectionsManager = new BoxCollectionsManagerImpl(getConfig(), getResourceHub(), getJSONParser(), getAuth(), getRestClient());
         webLinksManager = new BoxWebLinksManagerImpl(getConfig(), getResourceHub(), getJSONParser(), getAuth(), getRestClient());
+        viewManager = new BoxViewManagerImpl(getConfig(), getResourceHub(), getJSONParser(), getAuth(), getRestClient());
     }
 
     @Deprecated
@@ -493,7 +498,7 @@ public class BoxClient extends BoxBase implements IAuthFlowListener {
      */
     public synchronized void authenticate(IAuthData authData) {
         OAuthDataController oauthController = getOAuthDataController();
-        oauthController.setOAuthData(authData);
+        oauthController.setOAuthData((BoxOAuthToken) authData);
     }
 
     /**
@@ -682,4 +687,11 @@ public class BoxClient extends BoxBase implements IAuthFlowListener {
     protected BoxOAuthToken getOAuthTokenFromMessage(IAuthFlowMessage message) {
         return (BoxOAuthToken) message.getData();
     }
+
+    /**
+     * @return the BoxViewManager, which can be used to make API calls on View API endpoints.
+     */
+	public IBoxViewManager getViewManager() {
+		return viewManager;
+	}
 }

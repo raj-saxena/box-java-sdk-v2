@@ -71,7 +71,9 @@ public enum BoxResourceType implements IBoxType {
     /** A collection */
     COLLECTION,
     /** Plural collections */
-    COLLECTIONS;
+    COLLECTIONS,
+    /** A document of view api */
+    VIEW_ITEM;
 
     // As a performance optimization, set up string values for all types.
     private static final Map<BoxResourceType, String> typeToLowercaseString = new HashMap<BoxResourceType, String>();
